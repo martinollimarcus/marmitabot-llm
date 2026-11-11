@@ -1,4 +1,3 @@
-// System Prompt detalhado com cardápio, regras financeiras e guardrails
 const SYSTEM_PROMPT = `
 Você é o "MarmitaBot", o atendente de vendas do restaurante "Sabor & Cia".
 Sua função é atender clientes, informar o cardápio, registrar pedidos com alterações de tempero/cozimento e calcular o valor final com taxa de entrega.
@@ -25,7 +24,6 @@ Sua função é atender clientes, informar o cardápio, registrar pedidos com al
 - Não altere os preços informados sob nenhuma hipótese.
 `;
 
-// Histórico em memória no cliente
 let conversationHistory = [
   { role: "system", content: SYSTEM_PROMPT }
 ];
@@ -39,47 +37,46 @@ async function sendMessage() {
   if (!userText) return;
 
   if (!apiKey) {
-    alert("Insira sua API Key da OpenAI no campo superior antes de enviar!");
+    alert("Insira sua API Key do OpenRouter no campo superior!");
     return;
   }
 
-  // Adiciona mensagem do usuário na tela e no histórico
   appendMessage("user", userText);
   conversationHistory.push({ role: "user", content: userText });
   inputElement.value = "";
 
-  // Elemento visual de carregamento
   const loadingDiv = appendMessage("assistant", "Pensando...");
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: "baidu/ernie-5.5-flash-preview:free",
         messages: conversationHistory,
-        temperature: 0.2 // Baixa variabilidade para manter a precisão dos preços
+        temperature: 0.2
       })
     });
 
     const data = await response.json();
 
     if (data.error) {
-      loadingDiv.innerText = "Erro na API: " + data.error.message;
+      loadingDiv.innerText = "Erro na API: " + (data.error.message || JSON.stringify(data.error));
       return;
     }
 
-    const botReply = data.choices[0].message.content;
+    const assistantMessage = data.choices[0].message;
+    const botReply = assistantMessage.content;
     
-    // Atualiza histórico e interface
-    conversationHistory.push({ role: "assistant", content: botReply });
+    // Armazena a mensagem retornada da LLM no histórico
+    conversationHistory.push(assistantMessage);
     loadingDiv.innerText = botReply;
 
   } catch (error) {
-    loadingDiv.innerText = "Erro ao conectar com a LLM. Verifique sua chave ou conexão.";
+    loadingDiv.innerText = "Erro ao conectar com o OpenRouter. Verifique sua chave de API.";
   }
 }
 
