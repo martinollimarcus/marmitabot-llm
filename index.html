@@ -15,21 +15,24 @@
       <p class="text-xs text-red-100">Restaurante Sabor & Cia</p>
     </div>
     <div class="flex items-center gap-2">
-      <input id="apiKey" type="password" placeholder="Sua API Key (OpenAI)" class="text-black text-xs p-2 rounded border outline-none w-48" />
+      <input id="apiKey" type="password" placeholder="OpenRouter API Key (sk-or-...)" class="text-black text-xs p-2 rounded border outline-none w-52 focus:ring-2 focus:ring-red-300" />
     </div>
   </header>
 
   <!-- Janela de Mensagens -->
   <main id="chat" class="flex-1 bg-white p-4 overflow-y-auto border-x flex flex-col gap-3 shadow-inner">
-    <div class="bg-gray-200 p-3 rounded-lg max-w-[85%] self-start text-sm">
+    <div class="bg-gray-200 p-3 rounded-lg max-w-[85%] self-start text-sm text-gray-800 rounded-bl-none">
       👋 Olá! Sou o assistente virtual do <strong>Sabor & Cia</strong>. Gostaria de ver o cardápio do dia ou já quer fazer seu pedido?
     </div>
   </main>
 
-  <!-- Campo de Entrada -->
-  <footer class="bg-white p-3 border rounded-b-xl flex gap-2 shadow">
-    <input id="userInput" type="text" placeholder="Digite sua mensagem ou pedido..." class="flex-1 border p-2 text-sm rounded-lg outline-none focus:ring-2 focus:ring-red-500" onkeydown="if(event.key==='Enter') sendMessage()" />
-    <button onclick="sendMessage()" class="bg-red-600 text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-red-700 transition">Enviar</button>
+  <!-- Campo de Entrada com contador de caracteres visual -->
+  <footer class="bg-white p-3 border rounded-b-xl flex flex-col gap-1 shadow">
+    <div class="flex gap-2">
+      <input id="userInput" type="text" maxlength="300" placeholder="Digite sua mensagem ou pedido (máx. 300 caracteres)..." class="flex-1 border p-2 text-sm rounded-lg outline-none focus:ring-2 focus:ring-red-500" onkeydown="if(event.key==='Enter') sendMessage()" />
+      <button onclick="sendMessage()" class="bg-red-600 text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-red-700 transition">Enviar</button>
+    </div>
+    <span class="text-[10px] text-gray-400 self-end">Proteção ativa: limite de 300 caracteres por envio</span>
   </footer>
 
   <script src="app.js"></script>
