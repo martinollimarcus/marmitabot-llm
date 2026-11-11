@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarmitaBot - Restaurante Sabor & Cia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col justify-between max-w-2xl mx-auto p-4">
+
+  <!-- Cabeçalho -->
+  <header class="bg-red-600 text-white p-4 rounded-t-xl shadow flex justify-between items-center gap-2">
+    <div>
+      <h1 class="text-xl font-bold">🍱 MarmitaBot</h1>
+      <p class="text-xs text-red-100">Restaurante Sabor & Cia</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <input id="apiKey" type="password" placeholder="Sua API Key (OpenAI)" class="text-black text-xs p-2 rounded border outline-none w-48" />
+    </div>
+  </header>
+
+  <!-- Janela de Mensagens -->
+  <main id="chat" class="flex-1 bg-white p-4 overflow-y-auto border-x flex flex-col gap-3 shadow-inner">
+    <div class="bg-gray-200 p-3 rounded-lg max-w-[85%] self-start text-sm">
+      👋 Olá! Sou o assistente virtual do <strong>Sabor & Cia</strong>. Gostaria de ver o cardápio do dia ou já quer fazer seu pedido?
+    </div>
+  </main>
+
+  <!-- Campo de Entrada -->
+  <footer class="bg-white p-3 border rounded-b-xl flex gap-2 shadow">
+    <input id="userInput" type="text" placeholder="Digite sua mensagem ou pedido..." class="flex-1 border p-2 text-sm rounded-lg outline-none focus:ring-2 focus:ring-red-500" onkeydown="if(event.key==='Enter') sendMessage()" />
+    <button onclick="sendMessage()" class="bg-red-600 text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-red-700 transition">Enviar</button>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
