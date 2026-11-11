@@ -3,8 +3,8 @@
 Aplicação web desenvolvida 100% client-side (sem backend/servidor) para atendimento e vendas do restaurante "Sabor & Cia", hospedada no GitHub Pages e integrada à LLM via OpenRouter.
 
 ## 🔗 Links da Atividade
-- **Repositório GitHub:** `https://github.com/SEU_USUARIO/SEU_REPOSITORIO`
-- **Aplicação no GitHub Pages:** `https://SEU_USUARIO.github.io/SEU_REPOSITORIO/`
+- **Repositório GitHub:** `https://github.com/martinollimarcus/marmitabot-llm`
+- **Aplicação no GitHub Pages:** `https://martinollimarcus.github.io/marmitabot-llm/`
 
 ## 🎯 Funcionalidades Atendidas
 - [x] Apresentação do cardápio do dia e preços unitários por prato.
