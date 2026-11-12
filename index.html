@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MarmitaBot - Restaurante Sabor & Cia</title>
+  <title>Sabor & Cia - Marmitaria | Peça pelo Chat</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Bibliotecas para formatar Markdown com segurança Anti-XSS -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -13,7 +13,7 @@
       width: 100%;
       border-collapse: collapse;
       margin: 8px 0;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       background-color: #ffffff;
     }
     .markdown-body th,
@@ -52,72 +52,209 @@
     .markdown-body p:last-child {
       margin-bottom: 0;
     }
-    .markdown-body hr {
-      border-color: #cbd5e1;
-      margin: 8px 0;
-    }
   </style>
 </head>
-<body class="bg-gray-100 h-screen flex flex-col justify-between max-w-2xl mx-auto p-4">
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
-  <!-- Cabeçalho -->
-  <header class="bg-red-600 text-white p-4 rounded-t-xl shadow flex justify-between items-center gap-2">
-    <div>
-      <h1 class="text-xl font-bold">🍱 MarmitaBot</h1>
-      <p class="text-xs text-red-100">Restaurante Sabor & Cia</p>
-    </div>
-    <div class="flex items-center gap-2">
-      <input id="apiKey" type="password" placeholder="OpenRouter API Key (sk-or-...)" class="text-black text-xs p-2 rounded border outline-none w-52 focus:ring-2 focus:ring-red-300" />
+  <!-- Barra Superior Estilo Delivery -->
+  <header class="bg-white border-b sticky top-0 z-20 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-xl font-bold shadow-sm">
+          🍱
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg font-bold text-gray-900">Sabor &amp; Cia Marmitaria</h1>
+            <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">★ 4.9</span>
+          </div>
+          <p class="text-xs text-gray-500">Comida Caseira • 30–45 min • Entrega fixa R$ 5,00</p>
+        </div>
+      </div>
+
+      <!-- Campo da API Key -->
+      <div class="flex items-center gap-2">
+        <label for="apiKey" class="text-xs font-medium text-gray-600 hidden sm:inline">API Key:</label>
+        <input
+          id="apiKey"
+          type="password"
+          placeholder="Cole sua OpenRouter Key (sk-or-...)"
+          class="text-xs bg-gray-100 border border-gray-300 rounded-lg px-3 py-2 w-56 outline-none focus:bg-white focus:ring-2 focus:ring-red-500"
+        />
+      </div>
     </div>
   </header>
 
-  <!-- Janela de Mensagens (já inicia com o cardápio visível) -->
-  <main id="chat" class="flex-1 bg-white p-4 overflow-y-auto border-x flex flex-col gap-3 shadow-inner">
-    <div class="bg-gray-200 p-3 rounded-lg max-w-[90%] self-start text-sm text-gray-800 rounded-bl-none markdown-body">
-      <p>👋 Olá! Bem-vindo ao <strong>Sabor &amp; Cia</strong>! Confira nosso cardápio de hoje:</p>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Marmita</th>
-            <th>Acompanhamentos</th>
-            <th>Preço</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td><strong>Marmita Padrão</strong></td>
-            <td>Bife Acebolado, Arroz, Feijão e Farofa</td>
-            <td>R$ 22,00</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td><strong>Marmita Fit</strong></td>
-            <td>Frango Grelhado, Purê de Batata Doce e Legumes</td>
-            <td>R$ 20,00</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td><strong>Marmita Vegana</strong></td>
-            <td>Omelete de Grão-de-Bico com Salada</td>
-            <td>R$ 18,00</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>🚚 <strong>Taxa de entrega:</strong> R$ 5,00 (fixa para qualquer bairro)</p>
-      <p>💬 <strong>Como pedir:</strong> Cole sua API Key acima e digite abaixo qual marmita você deseja, a quantidade e se quer alguma alteração (ex.: <em>"sem cebola"</em>, <em>"bife bem passado"</em>).</p>
-    </div>
-  </main>
+  <!-- Conteúdo Principal: Vitrine à Esquerda + Chat de Pedidos à Direita -->
+  <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-  <!-- Campo de Entrada com contador de caracteres visual -->
-  <footer class="bg-white p-3 border rounded-b-xl flex flex-col gap-1 shadow">
-    <div class="flex gap-2">
-      <input id="userInput" type="text" maxlength="300" placeholder="Digite seu pedido (ex: 1 Marmita Padrão sem cebola)..." class="flex-1 border p-2 text-sm rounded-lg outline-none focus:ring-2 focus:ring-red-500" onkeydown="if(event.key==='Enter') sendMessage()" />
-      <button onclick="sendMessage()" class="bg-red-600 text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-red-700 transition">Enviar</button>
-    </div>
-    <span class="text-[10px] text-gray-400 self-end">Proteção ativa: limite de 300 caracteres por envio</span>
-  </footer>
+    <!-- COLUNA ESQUERDA: Cardápio da Loja (Estilo iFood) -->
+    <section class="lg:col-span-7 flex flex-col gap-5">
+
+      <!-- Banner de Aviso da Loja -->
+      <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex items-start gap-3">
+        <span class="text-2xl">🛵</span>
+        <div class="text-xs text-gray-600 leading-relaxed">
+          <p class="font-semibold text-gray-900 text-sm mb-0.5">Como fazer seu pedido</p>
+          Escolha as marmitas abaixo e envie sua solicitação no <strong>chat ao lado</strong>. Você pode personalizar temperos, ponto da carne ou remover ingredientes antes de fechar o valor total.
+        </div>
+      </div>
+
+      <!-- Título da Seção -->
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-gray-900">Cardápio do Dia</h2>
+        <span class="text-xs text-gray-500">3 opções disponíveis</span>
+      </div>
+
+      <!-- Lista de Cards das Marmitas -->
+      <div class="flex flex-col gap-4">
+
+        <!-- Card 1: Marmita Padrão -->
+        <article class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-300 hover:shadow-md transition flex justify-between items-center gap-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="font-bold text-gray-900 text-base">Marmita Padrão</h3>
+              <span class="text-[10px] font-semibold uppercase tracking-wide bg-red-50 text-red-600 px-2 py-0.5 rounded">Mais pedida</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+              Bife acebolado suculento grelhado na hora, acompanhado de arroz branco soltinho, feijão carioca temperado e farofa crocante.
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-base font-bold text-emerald-600">R$ 22,00</span>
+              <button
+                type="button"
+                onclick="preencherPedido('Marmita Padrão')"
+                class="text-xs font-semibold text-red-600 hover:text-white hover:bg-red-600 border border-red-600 px-3 py-1.5 rounded-lg transition"
+              >
+                Pedir no chat →
+              </button>
+            </div>
+          </div>
+          <div class="w-24 h-24 rounded-xl bg-amber-50 border border-amber-100 flex flex-col items-center justify-center shrink-0 select-none">
+            <span class="text-4xl">🥩</span>
+            <span class="text-[10px] font-medium text-amber-800 mt-1">Tradicional</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Marmita Fit -->
+        <article class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-300 hover:shadow-md transition flex justify-between items-center gap-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="font-bold text-gray-900 text-base">Marmita Fit</h3>
+              <span class="text-[10px] font-semibold uppercase tracking-wide bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">Leve</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+              Filé de peito de frango grelhado com ervas finas, purê cremoso de batata-doce e mix de legumes cozidos no vapor.
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-base font-bold text-emerald-600">R$ 20,00</span>
+              <button
+                type="button"
+                onclick="preencherPedido('Marmita Fit')"
+                class="text-xs font-semibold text-red-600 hover:text-white hover:bg-red-600 border border-red-600 px-3 py-1.5 rounded-lg transition"
+              >
+                Pedir no chat →
+              </button>
+            </div>
+          </div>
+          <div class="w-24 h-24 rounded-xl bg-emerald-50 border border-emerald-100 flex flex-col items-center justify-center shrink-0 select-none">
+            <span class="text-4xl">🍗</span>
+            <span class="text-[10px] font-medium text-emerald-800 mt-1">Equilibrada</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Marmita Vegana -->
+        <article class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-300 hover:shadow-md transition flex justify-between items-center gap-4">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="font-bold text-gray-900 text-base">Marmita Vegana</h3>
+              <span class="text-[10px] font-semibold uppercase tracking-wide bg-lime-50 text-lime-700 px-2 py-0.5 rounded">100% Vegetal</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+              Omelete dourado de farinha de grão-de-bico temperado com cúrcuma e cheiro-verde, acompanhado de salada fresca da estação.
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-base font-bold text-emerald-600">R$ 18,00</span>
+              <button
+                type="button"
+                onclick="preencherPedido('Marmita Vegana')"
+                class="text-xs font-semibold text-red-600 hover:text-white hover:bg-red-600 border border-red-600 px-3 py-1.5 rounded-lg transition"
+              >
+                Pedir no chat →
+              </button>
+            </div>
+          </div>
+          <div class="w-24 h-24 rounded-xl bg-lime-50 border border-lime-100 flex flex-col items-center justify-center shrink-0 select-none">
+            <span class="text-4xl">🥗</span>
+            <span class="text-[10px] font-medium text-lime-800 mt-1">Plant-Based</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Rodapé Informativo da Loja -->
+      <div class="bg-gray-100 border border-gray-200 rounded-xl p-4 text-xs text-gray-600 flex flex-wrap justify-between gap-2">
+        <span><strong>Personalizações livres:</strong> ponto da carne, remoção de ingredientes e ajuste de temperos.</span>
+        <span><strong>Taxa de entrega:</strong> R$ 5,00 (valor único)</span>
+      </div>
+
+    </section>
+
+    <!-- COLUNA DIREITA: Chat de Pedidos (MarmitaBot) -->
+    <aside class="lg:col-span-5 w-full bg-white border border-gray-200 rounded-xl shadow-md flex flex-col h-[540px] lg:h-[calc(100vh-6.5rem)] lg:sticky lg:top-20 overflow-hidden">
+
+      <!-- Cabeçalho do Chat -->
+      <div class="bg-red-600 text-white px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-base">
+            🤖
+          </div>
+          <div>
+            <h2 class="text-sm font-bold leading-tight">Atendente Sabor &amp; Cia</h2>
+            <p class="text-[11px] text-red-100 flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
+              Online para anotar seu pedido
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Área de Mensagens -->
+      <div id="chat" class="flex-1 p-4 overflow-y-auto flex flex-col gap-3 bg-gray-50">
+        <div class="bg-white border border-gray-200 p-3 rounded-xl rounded-tl-none max-w-[88%] self-start text-sm text-gray-800 shadow-sm markdown-body">
+          <p>👋 Olá! Sou o atendente virtual do <strong>Sabor &amp; Cia</strong>.</p>
+          <p>Escolha suas opções no cardápio ao lado e me diga aqui qual marmita você quer, a quantidade e se deseja alguma alteração (ex.: <em>"1 Marmita Padrão sem cebola e bife bem passado"</em>).</p>
+        </div>
+      </div>
+
+      <!-- Caixa de Envio -->
+      <div class="p-3 bg-white border-t border-gray-200 flex flex-col gap-1">
+        <div class="flex gap-2">
+          <input
+            id="userInput"
+            type="text"
+            maxlength="300"
+            placeholder="Digite seu pedido aqui..."
+            class="flex-1 border border-gray-300 px-3 py-2 text-sm rounded-lg outline-none focus:ring-2 focus:ring-red-500"
+            onkeydown="if(event.key==='Enter') sendMessage()"
+          />
+          <button
+            type="button"
+            onclick="sendMessage()"
+            class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-red-700 transition shrink-0"
+          >
+            Enviar
+          </button>
+        </div>
+        <div class="flex justify-between text-[10px] text-gray-400 px-0.5">
+          <span>Taxa de entrega: R$ 5,00</span>
+          <span>Máx. 300 caracteres</span>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
 
   <script src="app.js"></script>
 </body>
