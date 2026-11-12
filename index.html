@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MarmitaBot - Restaurante Sabor & Cia</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Bibliotecas para formatar Markdown com segurança Anti-XSS -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+  <style>
+    .markdown-body table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 0.8rem; }
+    .markdown-body th, .markdown-body td { border: 1px solid #cbd5e1; padding: 6px; text-align: left; }
+    .markdown-body th { background-color: #e2e8f0; font-weight: bold; }
+    .markdown-body ol { list-style-type: decimal; margin-left: 1.25rem; margin-top: 4px; }
+    .markdown-body ul { list-style-type: disc; margin-left: 1.25rem; margin-top: 4px; }
+    .markdown-body p { margin-bottom: 6px; }
+    .markdown-body p:last-child { margin-bottom: 0; }
+  </style>
 </head>
 <body class="bg-gray-100 h-screen flex flex-col justify-between max-w-2xl mx-auto p-4">
 
