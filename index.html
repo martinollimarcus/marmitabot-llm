@@ -68,7 +68,7 @@
             <h1 class="text-lg font-bold text-gray-900">Sabor &amp; Cia Marmitaria</h1>
             <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">★ 4.9</span>
           </div>
-          <p class="text-xs text-gray-500">Comida Caseira • 30–45 min • Entrega fixa R$ 5,00</p>
+          <p class="text-xs text-gray-500">Comida Caseira, Bebidas &amp; Sobremesas • 30–45 min • Entrega fixa R$ 5,00</p>
         </div>
       </div>
 
@@ -95,106 +95,310 @@
       <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex items-start gap-3">
         <span class="text-2xl">🛵</span>
         <div class="text-xs text-gray-600 leading-relaxed">
-          <p class="font-semibold text-gray-900 text-sm mb-0.5">Como fazer seu pedido</p>
-          Escolha as marmitas abaixo e envie sua solicitação no <strong>chat ao lado</strong>. Você pode personalizar temperos, ponto da carne ou remover ingredientes antes de fechar o valor total.
+          <p class="font-semibold text-gray-900 text-sm mb-0.5">Como montar seu pedido completo</p>
+          Clique em qualquer <strong>marmita, bebida ou sobremesa</strong> para escolher sabores, retirar ingredientes e definir a quantidade. Cada item escolhido é adicionado automaticamente ao chat ao lado!
         </div>
       </div>
 
-      <!-- Título da Seção -->
-      <div class="flex items-center justify-between">
-        <h2 class="text-lg font-bold text-gray-900">Cardápio do Dia</h2>
-        <span class="text-xs text-gray-500">3 opções disponíveis</span>
+      <!-- Abas de Filtro de Categoria (Estilo iFood) -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1">
+        <button
+          type="button"
+          onclick="filtrarCategoria('todos')"
+          id="tab-todos"
+          class="categoria-tab bg-red-600 text-white text-xs font-semibold px-3.5 py-2 rounded-full shadow-sm transition shrink-0"
+        >
+          Todos (9)
+        </button>
+        <button
+          type="button"
+          onclick="filtrarCategoria('marmitas')"
+          id="tab-marmitas"
+          class="categoria-tab bg-white text-gray-700 border border-gray-200 hover:border-red-300 text-xs font-semibold px-3.5 py-2 rounded-full transition shrink-0"
+        >
+          🍱 Marmitas (3)
+        </button>
+        <button
+          type="button"
+          onclick="filtrarCategoria('bebidas')"
+          id="tab-bebidas"
+          class="categoria-tab bg-white text-gray-700 border border-gray-200 hover:border-red-300 text-xs font-semibold px-3.5 py-2 rounded-full transition shrink-0"
+        >
+          🥤 Bebidas (3)
+        </button>
+        <button
+          type="button"
+          onclick="filtrarCategoria('sobremesas')"
+          id="tab-sobremesas"
+          class="categoria-tab bg-white text-gray-700 border border-gray-200 hover:border-red-300 text-xs font-semibold px-3.5 py-2 rounded-full transition shrink-0"
+        >
+          🍮 Sobremesas (3)
+        </button>
       </div>
 
-      <!-- Lista de Cards das Marmitas -->
-      <div class="flex flex-col gap-4">
+      <!-- SEÇÃO 1: MARMITAS -->
+      <div id="secao-marmitas" class="categoria-secao flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-gray-900">🍱 Marmitas do Dia</h2>
+          <span class="text-xs text-gray-500">Clique para personalizar</span>
+        </div>
 
-        <!-- Card 1: Marmita Padrão -->
-        <article class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-300 hover:shadow-md transition flex justify-between items-center gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-2 mb-1">
-              <h3 class="font-bold text-gray-900 text-base">Marmita Padrão</h3>
-              <span class="text-[10px] font-semibold uppercase tracking-wide bg-red-50 text-red-600 px-2 py-0.5 rounded">Mais pedida</span>
+        <div class="flex flex-col gap-3">
+          <!-- Card 1: Marmita Padrão -->
+          <article
+            onclick="abrirModalItem('padrao')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Marmita Padrão</h3>
+                <span class="text-[10px] font-semibold uppercase tracking-wide bg-red-50 text-red-600 px-2 py-0.5 rounded">Mais pedida</span>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Bife acebolado suculento grelhado na hora, acompanhado de arroz branco soltinho, feijão carioca temperado e farofa crocante.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 22,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Personalizar →
+                </span>
+              </div>
             </div>
-            <p class="text-xs text-gray-500 mb-3 leading-relaxed">
-              Bife acebolado suculento grelhado na hora, acompanhado de arroz branco soltinho, feijão carioca temperado e farofa crocante.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-base font-bold text-emerald-600">R$ 22,00</span>
-              <button
-                type="button"
-                onclick="preencherPedido('Marmita Padrão')"
-                class="text-xs font-semibold text-red-600 hover:text-white hover:bg-red-600 border border-red-600 px-3 py-1.5 rounded-lg transition"
-              >
-                Pedir no chat →
-              </button>
+            <div class="w-24 h-24 rounded-xl bg-amber-50 border border-amber-100 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">🥩</span>
+              <span class="text-[10px] font-medium text-amber-800 mt-1">Tradicional</span>
             </div>
-          </div>
-          <div class="w-24 h-24 rounded-xl bg-amber-50 border border-amber-100 flex flex-col items-center justify-center shrink-0 select-none">
-            <span class="text-4xl">🥩</span>
-            <span class="text-[10px] font-medium text-amber-800 mt-1">Tradicional</span>
-          </div>
-        </article>
+          </article>
 
-        <!-- Card 2: Marmita Fit -->
-        <article class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-300 hover:shadow-md transition flex justify-between items-center gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-2 mb-1">
-              <h3 class="font-bold text-gray-900 text-base">Marmita Fit</h3>
-              <span class="text-[10px] font-semibold uppercase tracking-wide bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">Leve</span>
+          <!-- Card 2: Marmita Fit -->
+          <article
+            onclick="abrirModalItem('fit')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Marmita Fit</h3>
+                <span class="text-[10px] font-semibold uppercase tracking-wide bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">Leve</span>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Filé de peito de frango grelhado com ervas finas, purê cremoso de batata-doce e mix de legumes cozidos no vapor.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 20,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Personalizar →
+                </span>
+              </div>
             </div>
-            <p class="text-xs text-gray-500 mb-3 leading-relaxed">
-              Filé de peito de frango grelhado com ervas finas, purê cremoso de batata-doce e mix de legumes cozidos no vapor.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-base font-bold text-emerald-600">R$ 20,00</span>
-              <button
-                type="button"
-                onclick="preencherPedido('Marmita Fit')"
-                class="text-xs font-semibold text-red-600 hover:text-white hover:bg-red-600 border border-red-600 px-3 py-1.5 rounded-lg transition"
-              >
-                Pedir no chat →
-              </button>
+            <div class="w-24 h-24 rounded-xl bg-emerald-50 border border-emerald-100 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">🍗</span>
+              <span class="text-[10px] font-medium text-emerald-800 mt-1">Equilibrada</span>
             </div>
-          </div>
-          <div class="w-24 h-24 rounded-xl bg-emerald-50 border border-emerald-100 flex flex-col items-center justify-center shrink-0 select-none">
-            <span class="text-4xl">🍗</span>
-            <span class="text-[10px] font-medium text-emerald-800 mt-1">Equilibrada</span>
-          </div>
-        </article>
+          </article>
 
-        <!-- Card 3: Marmita Vegana -->
-        <article class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-300 hover:shadow-md transition flex justify-between items-center gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-2 mb-1">
-              <h3 class="font-bold text-gray-900 text-base">Marmita Vegana</h3>
-              <span class="text-[10px] font-semibold uppercase tracking-wide bg-lime-50 text-lime-700 px-2 py-0.5 rounded">100% Vegetal</span>
+          <!-- Card 3: Marmita Vegana -->
+          <article
+            onclick="abrirModalItem('vegana')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Marmita Vegana</h3>
+                <span class="text-[10px] font-semibold uppercase tracking-wide bg-lime-50 text-lime-700 px-2 py-0.5 rounded">100% Vegetal</span>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Omelete dourado de farinha de grão-de-bico temperado com cúrcuma e cheiro-verde, acompanhado de salada fresca da estação.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 18,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Personalizar →
+                </span>
+              </div>
             </div>
-            <p class="text-xs text-gray-500 mb-3 leading-relaxed">
-              Omelete dourado de farinha de grão-de-bico temperado com cúrcuma e cheiro-verde, acompanhado de salada fresca da estação.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-base font-bold text-emerald-600">R$ 18,00</span>
-              <button
-                type="button"
-                onclick="preencherPedido('Marmita Vegana')"
-                class="text-xs font-semibold text-red-600 hover:text-white hover:bg-red-600 border border-red-600 px-3 py-1.5 rounded-lg transition"
-              >
-                Pedir no chat →
-              </button>
+            <div class="w-24 h-24 rounded-xl bg-lime-50 border border-lime-100 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">🥗</span>
+              <span class="text-[10px] font-medium text-lime-800 mt-1">Plant-Based</span>
             </div>
-          </div>
-          <div class="w-24 h-24 rounded-xl bg-lime-50 border border-lime-100 flex flex-col items-center justify-center shrink-0 select-none">
-            <span class="text-4xl">🥗</span>
-            <span class="text-[10px] font-medium text-lime-800 mt-1">Plant-Based</span>
-          </div>
-        </article>
+          </article>
+        </div>
+      </div>
 
+      <!-- SEÇÃO 2: BEBIDAS -->
+      <div id="secao-bebidas" class="categoria-secao flex flex-col gap-3 pt-2">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-gray-900">🥤 Bebidas Geladas</h2>
+          <span class="text-xs text-gray-500">Escolha o sabor e gelo</span>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <!-- Bebida 1: Refrigerante Lata -->
+          <article
+            onclick="abrirModalItem('refri')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Refrigerante Lata 350ml</h3>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Lata bem gelada nos sabores Coca-Cola, Coca-Cola Zero, Guaraná Antarctica ou Sprite. Opção de copo com gelo e limão.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 6,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Escolher sabor →
+                </span>
+              </div>
+            </div>
+            <div class="w-24 h-24 rounded-xl bg-sky-50 border border-sky-100 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">🥤</span>
+              <span class="text-[10px] font-medium text-sky-800 mt-1">350ml</span>
+            </div>
+          </article>
+
+          <!-- Bebida 2: Suco Natural -->
+          <article
+            onclick="abrirModalItem('suco')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Suco Natural 500ml</h3>
+                <span class="text-[10px] font-semibold uppercase tracking-wide bg-orange-50 text-orange-700 px-2 py-0.5 rounded">Feito na hora</span>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Suco fresco da fruta nos sabores Laranja, Limão ou Maracujá. Escolha com açúcar, sem açúcar ou com adoçante.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 8,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Escolher sabor →
+                </span>
+              </div>
+            </div>
+            <div class="w-24 h-24 rounded-xl bg-orange-50 border border-orange-100 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">🧃</span>
+              <span class="text-[10px] font-medium text-orange-800 mt-1">Natural 500ml</span>
+            </div>
+          </article>
+
+          <!-- Bebida 3: Água Mineral -->
+          <article
+            onclick="abrirModalItem('agua')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Água Mineral 500ml</h3>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Garrafa de água mineral gelada de 500ml, disponível nas opções sem gás ou com gás.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 4,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Escolher opção →
+                </span>
+              </div>
+            </div>
+            <div class="w-24 h-24 rounded-xl bg-cyan-50 border border-cyan-100 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">💧</span>
+              <span class="text-[10px] font-medium text-cyan-800 mt-1">500ml</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 3: SOBREMESAS -->
+      <div id="secao-sobremesas" class="categoria-secao flex flex-col gap-3 pt-2">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-gray-900">🍮 Sobremesas</h2>
+          <span class="text-xs text-gray-500">Para fechar o almoço</span>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <!-- Sobremesa 1: Pudim -->
+          <article
+            onclick="abrirModalItem('pudim')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Pudim de Leite Condensado</h3>
+                <span class="text-[10px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-700 px-2 py-0.5 rounded">Caseiro</span>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Fatia generosa de pudim cremoso de leite condensado sem furinhos, banhado em calda dourada de caramelo.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 9,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Adicionar →
+                </span>
+              </div>
+            </div>
+            <div class="w-24 h-24 rounded-xl bg-amber-50 border border-amber-100 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">🍮</span>
+              <span class="text-[10px] font-medium text-amber-800 mt-1">150g</span>
+            </div>
+          </article>
+
+          <!-- Sobremesa 2: Mousse de Maracujá -->
+          <article
+            onclick="abrirModalItem('mousse')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Mousse de Maracujá</h3>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Mousse aerado e refrescante feito com polpa natural de maracujá e cobertura de calda da fruta.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 8,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Adicionar →
+                </span>
+              </div>
+            </div>
+            <div class="w-24 h-24 rounded-xl bg-yellow-50 border border-yellow-100 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">🍨</span>
+              <span class="text-[10px] font-medium text-yellow-800 mt-1">140g</span>
+            </div>
+          </article>
+
+          <!-- Sobremesa 3: Brownie de Chocolate -->
+          <article
+            onclick="abrirModalItem('brownie')"
+            class="cursor-pointer bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-red-400 hover:shadow-md transition flex justify-between items-center gap-4 group"
+          >
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-gray-900 text-base group-hover:text-red-600 transition">Brownie de Chocolate</h3>
+              </div>
+              <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+                Brownie artesanal de chocolate meio amargo com casquinha crocante e interior macio e úmido.
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-emerald-600">R$ 10,00</span>
+                <span class="text-xs font-semibold text-red-600 group-hover:bg-red-600 group-hover:text-white border border-red-600 px-3 py-1.5 rounded-lg transition">
+                  Adicionar →
+                </span>
+              </div>
+            </div>
+            <div class="w-24 h-24 rounded-xl bg-stone-100 border border-stone-200 flex flex-col items-center justify-center shrink-0 select-none">
+              <span class="text-4xl">🍫</span>
+              <span class="text-[10px] font-medium text-stone-700 mt-1">100g</span>
+            </div>
+          </article>
+        </div>
       </div>
 
       <!-- Rodapé Informativo da Loja -->
       <div class="bg-gray-100 border border-gray-200 rounded-xl p-4 text-xs text-gray-600 flex flex-wrap justify-between gap-2">
-        <span><strong>Personalizações livres:</strong> ponto da carne, remoção de ingredientes e ajuste de temperos.</span>
+        <span><strong>Personalizações livres:</strong> ponto da carne, sabores, remoção de ingredientes e observações.</span>
         <span><strong>Taxa de entrega:</strong> R$ 5,00 (valor único)</span>
       </div>
 
@@ -223,7 +427,7 @@
       <div id="chat" class="flex-1 p-4 overflow-y-auto flex flex-col gap-3 bg-gray-50">
         <div class="bg-white border border-gray-200 p-3 rounded-xl rounded-tl-none max-w-[88%] self-start text-sm text-gray-800 shadow-sm markdown-body">
           <p>👋 Olá! Sou o atendente virtual do <strong>Sabor &amp; Cia</strong>.</p>
-          <p>Escolha suas opções no cardápio ao lado e me diga aqui qual marmita você quer, a quantidade e se deseja alguma alteração (ex.: <em>"1 Marmita Padrão sem cebola e bife bem passado"</em>).</p>
+          <p>Clique nas <strong>marmitas, bebidas ou sobremesas</strong> ao lado para configurar seus itens, ou escreva seu pedido diretamente abaixo!</p>
         </div>
       </div>
 
@@ -235,7 +439,7 @@
             type="text"
             maxlength="300"
             placeholder="Digite seu pedido aqui..."
-            class="flex-1 border border-gray-300 px-3 py-2 text-sm rounded-lg outline-none focus:ring-2 focus:ring-red-500"
+            class="flex-1 border border-gray-300 px-3 py-2 text-sm rounded-lg outline-none focus:ring-2 focus:ring-red-500 transition"
             onkeydown="if(event.key==='Enter') sendMessage()"
           />
           <button
@@ -255,6 +459,105 @@
     </aside>
 
   </main>
+
+  <!-- POP-UP (MODAL) DE PERSONALIZAÇÃO DE ITEM -->
+  <div
+    id="modalItem"
+    onclick="if(event.target === this) fecharModalItem()"
+    class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-[1px] flex items-center justify-center p-4"
+  >
+    <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-gray-200 overflow-hidden flex flex-col max-h-[90vh]">
+
+      <!-- Cabeçalho do Modal -->
+      <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50">
+        <div class="flex items-center gap-3">
+          <span id="modalEmoji" class="text-3xl">🥩</span>
+          <div>
+            <h3 id="modalTitulo" class="font-bold text-gray-900 text-base">Marmita Padrão</h3>
+            <p id="modalPrecoUnitario" class="text-xs font-semibold text-emerald-600">R$ 22,00 cada</p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onclick="fecharModalItem()"
+          aria-label="Fechar"
+          class="w-8 h-8 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-200 flex items-center justify-center text-lg transition"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Corpo Rolável com Opções -->
+      <div class="p-5 overflow-y-auto flex flex-col gap-5 text-sm">
+        <p id="modalDescricao" class="text-xs text-gray-500 leading-relaxed"></p>
+
+        <!-- Seção 1: Opção Única (Ponto / Sabor / Preparo) -->
+        <div id="modalSecaoRadio">
+          <div class="flex items-center justify-between mb-2">
+            <h4 id="modalRadioTitulo" class="font-bold text-gray-800 text-xs uppercase tracking-wide">Escolha uma opção</h4>
+            <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-medium">Escolha 1</span>
+          </div>
+          <div id="modalRadioLista" class="flex flex-col gap-2"></div>
+        </div>
+
+        <!-- Seção 2: Múltipla Escolha (Retirar ingredientes / Adicionais grátis) -->
+        <div id="modalSecaoCheck">
+          <div class="flex items-center justify-between mb-2">
+            <h4 id="modalCheckTitulo" class="font-bold text-gray-800 text-xs uppercase tracking-wide">Retirar ingredientes</h4>
+            <span class="text-[10px] text-gray-400">Opcional</span>
+          </div>
+          <div id="modalCheckLista" class="grid grid-cols-2 gap-2"></div>
+        </div>
+
+        <!-- Seção 3: Observação rápida -->
+        <div>
+          <label for="modalObs" class="block font-bold text-gray-800 text-xs uppercase tracking-wide mb-1.5">
+            Alguma observação extra?
+          </label>
+          <input
+            id="modalObs"
+            type="text"
+            maxlength="50"
+            placeholder="Ex.: bem gelado, molho à parte..."
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-red-500"
+          />
+        </div>
+      </div>
+
+      <!-- Rodapé Fixo: Quantidade + Botão Pedir no Chat -->
+      <div class="px-5 py-4 border-t border-gray-200 bg-white flex items-center justify-between gap-3">
+        <!-- Controle de Quantidade -->
+        <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+          <button
+            type="button"
+            onclick="alterarQuantidade(-1)"
+            class="w-9 h-10 text-red-600 font-bold hover:bg-red-50 transition text-lg"
+          >
+            −
+          </button>
+          <span id="modalQuantidade" class="w-9 text-center font-bold text-sm text-gray-900 select-none">1</span>
+          <button
+            type="button"
+            onclick="alterarQuantidade(1)"
+            class="w-9 h-10 text-red-600 font-bold hover:bg-red-50 transition text-lg"
+          >
+            +
+          </button>
+        </div>
+
+        <!-- Botão de Confirmação -->
+        <button
+          type="button"
+          onclick="confirmarConfiguracaoNoChat()"
+          class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-2.5 px-4 rounded-lg shadow-sm transition flex items-center justify-between"
+        >
+          <span>Pedir no chat</span>
+          <span id="modalSubtotal" class="font-bold">R$ 22,00</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
